@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="221d8730-a355-4ee8-b3bd-1615cd0f0e53">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     cliente.`nomeCliente` AS cliente_nomeCliente,
+     endereco.`ruaEndereco` AS endereco_ruaEndereco,
+     endereco.`bairroEndereco` AS endereco_bairroEndereco,
+     endereco.`cepEndereco` AS endereco_cepEndereco,
+     endereco.`cidadeEndereco` AS endereco_cidadeEndereco,
+     endereco.`nDaCasaEndereco` AS endereco_nDaCasaEndereco,
+     comanda.`obsProduto` AS comanda_obsProduto,
+     pedido.`precoPedido` AS pedido_precoPedido,
+     pedido.`statusPedido` AS pedido_statusPedido,
+     pedido.`dataPedido` AS pedido_dataPedido,
+     pedido.`horaPedido` AS pedido_horaPedido,
+     cliente.`telefoneCliente` AS cliente_telefoneCliente,
+     cliente.`celularCliente` AS cliente_celularCliente,
+     pedido.`idPedido` AS pedido_idPedido,
+     produto.`nomeProduto` AS produto_nomeProduto,
+     produto.`precoProduto` AS produto_precoProduto
+FROM
+     `endereco` endereco INNER JOIN `cliente` cliente ON endereco.`idEndereco` = cliente.`idClienteEndereco`
+     INNER JOIN `pedido` pedido ON cliente.`idCliente` = pedido.`idCliente`
+     INNER JOIN `comanda` comanda ON pedido.`idPedido` = comanda.`idPedido`
+     INNER JOIN `produto` produto ON comanda.`idProduto` = produto.`idProduto`]]>
+	</queryString>
+	<field name="cliente_nomeCliente" class="java.lang.String"/>
+	<field name="endereco_ruaEndereco" class="java.lang.String"/>
+	<field name="endereco_bairroEndereco" class="java.lang.String"/>
+	<field name="endereco_cepEndereco" class="java.lang.String"/>
+	<field name="endereco_cidadeEndereco" class="java.lang.String"/>
+	<field name="endereco_nDaCasaEndereco" class="java.lang.Integer"/>
+	<field name="comanda_obsProduto" class="java.lang.String"/>
+	<field name="pedido_precoPedido" class="java.lang.String"/>
+	<field name="pedido_statusPedido" class="java.lang.String"/>
+	<field name="pedido_dataPedido" class="java.sql.Date"/>
+	<field name="pedido_horaPedido" class="java.sql.Timestamp"/>
+	<field name="cliente_telefoneCliente" class="java.lang.String"/>
+	<field name="cliente_celularCliente" class="java.lang.String"/>
+	<field name="pedido_idPedido" class="java.lang.Integer"/>
+	<field name="produto_nomeProduto" class="java.lang.String"/>
+	<field name="produto_precoProduto" class="java.math.BigDecimal"/>
+	<group name="cliente_nomeCliente">
+		<groupExpression><![CDATA[$F{cliente_nomeCliente}]]></groupExpression>
+		<groupHeader>
+			<band height="60">
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="120" y="7" width="214" height="20" uuid="890dd6ab-853b-46b5-957f-e1285ab05159"/>
+					<textFieldExpression><![CDATA[$F{pedido_idPedido}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="8" y="7" width="100" height="20" uuid="235da419-62ed-421f-bf60-08e6ba0a1358"/>
+					<text><![CDATA[Nº do Pedido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="8" y="40" width="100" height="20" uuid="73fa47ae-dc0c-4ef4-88ec-0811e68210c7"/>
+					<text><![CDATA[Lanche]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="178" y="40" width="100" height="20" uuid="d6e7eed2-edbb-43f1-bd0d-a7566315374c"/>
+					<text><![CDATA[Complementos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="476" y="40" width="79" height="20" uuid="0bbf8616-51a1-486e-ae4a-82dfb685baf8"/>
+					<text><![CDATA[Valor Unitário]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="22"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="62" y="7" width="439" height="119" uuid="59cb874e-4199-4ee9-80cb-d36328b8af63"/>
+				<imageExpression><![CDATA[".\\66.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="159" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="120" y="125" width="153" height="15" uuid="667ecfd0-db9b-4788-83cd-ec5bce0821ea"/>
+				<textFieldExpression><![CDATA[$F{cliente_telefoneCliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="384" y="125" width="150" height="15" uuid="762f7739-d8b1-4d42-8528-b8aa1f6caa62"/>
+				<textFieldExpression><![CDATA[$F{cliente_celularCliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="176" y="83" width="184" height="15" uuid="d9f7c218-a135-4fbe-80e3-fbad343934e8"/>
+				<textFieldExpression><![CDATA[$F{endereco_bairroEndereco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="178" y="65" width="194" height="15" uuid="3911ff96-081b-4cf0-9f39-b5320c700bce"/>
+				<textFieldExpression><![CDATA[$F{endereco_ruaEndereco}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="f816316b-e488-4c11-b86e-e0988421f13b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<frame>
+				<reportElement mode="Opaque" x="1" y="28" width="551" height="24" forecolor="#B89F7D" backcolor="#FF6633" uuid="f49b6df2-2de3-46c1-96c7-4785ae0cf22a"/>
+			</frame>
+			<textField>
+				<reportElement style="SubTitle" x="8" y="28" width="413" height="24" forecolor="#FFFFFF" uuid="403342e0-4dba-4cbf-af9f-1d17e23978e5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_nomeCliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="65" width="100" height="20" uuid="5c0d0df7-9ac5-4469-bb3e-420578b3ae81"/>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="176" y="103" width="234" height="15" uuid="2faf5f7a-ad29-485e-b430-d6950354a761"/>
+				<textFieldExpression><![CDATA[$F{endereco_cepEndereco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="436" y="65" width="119" height="15" uuid="3278877f-6c6f-45c3-9553-c6fa3a932e4a"/>
+				<textFieldExpression><![CDATA[$F{endereco_nDaCasaEndereco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="421" y="83" width="134" height="15" uuid="b09fe0b1-81fd-4f16-9fd7-82385378847b"/>
+				<textFieldExpression><![CDATA[$F{endereco_cidadeEndereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="125" width="100" height="20" uuid="b947af2e-4776-4a9c-8557-49ee6b838b11"/>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="125" width="56" height="20" uuid="fba92524-8393-4c39-9cec-c1f50e2093b8"/>
+				<text><![CDATA[Celular:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="65" width="11" height="20" uuid="140247ac-9562-4a01-8e4f-97e95844750d"/>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="63" width="47" height="20" uuid="76905fd9-989e-4dc0-981b-de80df12d16a"/>
+				<text><![CDATA[Rua:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="83" width="48" height="20" uuid="7ee21647-d279-42eb-b782-5085d66e23d6"/>
+				<text><![CDATA[Cidade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="80" width="47" height="18" uuid="6b09da78-ed2d-4037-bd2e-b1a26d3cbf84"/>
+				<text><![CDATA[Bairro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="98" width="35" height="20" uuid="84b92baa-c46b-4670-ad1a-5eddf5c1a790"/>
+				<text><![CDATA[Cep:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="178" y="10" width="284" height="15" uuid="87897e3d-2eb1-4c7a-a2e5-fb38d2c4e735"/>
+				<textFieldExpression><![CDATA[$F{comanda_obsProduto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="6" y="10" width="164" height="15" uuid="f3c5715d-1efd-44e3-a7d0-48b50a47ea61"/>
+				<textFieldExpression><![CDATA[$F{produto_nomeProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="5" width="54" height="20" uuid="1824513e-5cd9-4ad4-8505-2f25b1c4d509"/>
+				<textFieldExpression><![CDATA[$F{produto_precoProduto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="56" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fbff680a-edb2-4c77-9299-7fdab6be858c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="216" y="34" width="236" height="15" uuid="242efb57-8961-4e0f-8532-81e0f56a6044"/>
+				<textFieldExpression><![CDATA[$F{pedido_statusPedido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="8" y="34" width="112" height="15" uuid="3e3ef187-5676-43c8-bb36-33e27686bf26"/>
+				<textFieldExpression><![CDATA[$F{pedido_dataPedido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="HH.mm">
+				<reportElement style="Detail" x="133" y="34" width="65" height="15" uuid="67097664-6f84-4817-a72d-d429ac528c4b"/>
+				<textFieldExpression><![CDATA[$F{pedido_horaPedido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement style="Detail" x="512" y="34" width="32" height="15" uuid="524beee4-3bbb-4141-ba41-13ebf89b7eb1"/>
+				<textFieldExpression><![CDATA[$F{pedido_precoPedido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="4" width="112" height="20" uuid="b0ca2efd-40a9-4ef1-b7cc-10e1dbcb0331"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="4" width="65" height="20" uuid="ef94c4aa-8a68-4c66-8174-0fa83a76ea63"/>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="4" width="100" height="20" uuid="ea60260d-7a04-4ff6-b2e4-e91721a020c1"/>
+				<text><![CDATA[Status do pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="4" width="59" height="20" uuid="a58b0550-eaf2-4288-847c-9379e1a9e260"/>
+				<text><![CDATA[Preço]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#FF6633" uuid="fb0b363f-2790-4624-9efa-e8ae75dd191d"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="a30ba997-33f8-433a-af22-ea8aac1151f5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="a32049f6-793d-44c2-a720-a7422850b196"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="649cf529-31e8-4710-95b0-ed290158381a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
